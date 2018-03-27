@@ -49,6 +49,7 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    dotenv (2.2.1)
     enumerable-lazy (0.0.2)
     equalizer (0.0.11)
     ffi (1.9.14)
@@ -90,6 +91,7 @@ GEM
       enumerable-lazy
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    one_signal (1.2.0)
     otr-activerecord (1.2.0)
       activerecord (>= 4.0, < 5.1)
       hashie-forbidden_attributes (~> 0.1)
@@ -145,11 +147,13 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.2.7)
   capybara
+  dotenv
   grape
   grape-entity
   grape-swagger
   grape-swagger-entity
   hijri
+  one_signal
   otr-activerecord
   pg
   pry
@@ -165,4 +169,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.2
+   1.16.0

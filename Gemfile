@@ -14,6 +14,8 @@ gem "sinatra", github: "sinatra/sinatra"
 gem "pry"
 gem "grape-swagger"
 gem "hijri"
+gem "one_signal"
+gem "dotenv"
 
 group :development, :test do
   gem "sqlite3"

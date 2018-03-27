@@ -1,5 +1,4 @@
 require "pry"
-require "dotenv"
 require "one_signal"
 
 OneSignal::OneSignal.api_key = "NjU4NjI1ZDAtNjJhOS00YmFjLTk5YmQtNGJiNjUyODY3MGI4" # ENV['ONESIGNAL_API_KEY']
@@ -7,17 +6,15 @@ OneSignal::OneSignal.user_auth_key = "MDQxZTJiZjktNjVkNi00NTRhLWE5NjYtNDlmMmM4Yj
 APP_ID = "bab46e1e-c306-429f-8fe2-58759077212f"
 
 response = OneSignal::Player.all(params: {app_id: APP_ID})
-response = JSON.parse(
-  response.body,
-  symbolize_names: true
-)
-player_ids = response[:players].collect { |player| player[:id] }
+response = JSON.parse(response.body, symbolize_names: true)
+player_ids = response[:players].map { |player| player[:id] }
 params = {
   app_id: APP_ID,
   contents: {
     en: 'Yeiiiii!'
   },
-  include_player_ids: player_ids
+  include_player_ids: player_ids,
+  send_after:  Time.now + 30
 }
 begin
   OneSignal::Notification.create(params: params)

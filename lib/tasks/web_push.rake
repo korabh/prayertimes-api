@@ -77,7 +77,7 @@ class OneSignalApi
     )
   end
 
-  private
+private
 
   attr_reader :app_id, :app_url
 
@@ -99,25 +99,19 @@ class MessageFormatter
   attr_reader :key, :period
 
   def heading
-    "Takvimi: #{_key}".encode!('utf-8')
+    "Upcoming Prayer: #{_key}".encode!('utf-8')
   end
 
   def content
-    if period == (5 || 10 || 15)
-      "#{_key} edhe #{period} minuta."
+    if period == 5 || period == 10 || period == 15
+      "#{period} minutes to #{_key} prayer"
     else
-      "Koha e namazit te #{_key}"
+      "#{_key} :)"
     end
   end
 
   def _key
-    case key
-    when :fajr     then "Sabahu"
-    when :dhuhr    then "Dreka"
-    when :asr      then "Ikindia"
-    when :maghrib  then "Akshami"
-    when :isha     then "Jacia"
-    end
+    key.to_s.capitalize
   end
 
 end
@@ -135,40 +129,41 @@ class MessageSender
 
   def run
     t = {
-      fajr: '05:14',
-      dhuhr: '12:45',
-      asr: '16:16',
-      maghrib: '19:05',
-      isha: '20:37'
+      fajr: '23:00',
+      maghrib: '23:45',
     }
     ts = t.each do |k, v|
       tp = Time.parse(v)
       intervals = {
-        0  => tp,
-        5  => tp.advance(seconds: -5),
-        10 => tp.advance(seconds: -10),
-        15 => tp.advance(seconds: -15),
+        0  => tp.advance(seconds: 5),
+        5  => tp.advance(minutes: -5),
+        10 => tp.advance(minutes: -10),
+        15 => tp.advance(minutes: -15),
       }
       t[k.to_sym] = intervals
     end
 
     devices = client.devices.players.map { |device| device.id }
 
-    ts.map do |key, intervals|
+    a = []
+    ts.each do |key, intervals|
       _h = intervals.each do |interval, period|
         f = MessageFormatter.new(key, interval)
-        client.create_notification(
-          f.heading,
-          f.content,
-          include_player_ids: devices,
-          send_after: Time.now # period
-        )
+        a << {heading: f.heading, content: f.content, devices: devices, send_after: period}
+        # client.create_notification(
+        #   f.heading,
+        #   f.content,
+        #   include_player_ids: devices,
+        #   send_after: period
+        # )
       end
       puts "Completed! at: #{Time.now}"
     end
+
+    binding.pry
   end
 
-  private
+private
 
   attr_reader :client
 

@@ -43,7 +43,7 @@ class App < Sinatra::Base
   get "/" do
     date = Date.today.strftime("%d-%m-%Y")
     timings = Timings.find_by_date(date)
-    require 'pry'; binding.pry
+
     erb :index, locals: { timings: timings }
   end
 end

@@ -91,12 +91,12 @@ private
 end
 
 class MessageFormatter
+  attr_reader :key, :period
+
   def initialize(key, period)
     @key = key
     @period = period
   end
-
-  attr_reader :key, :period
 
   def heading
     "Upcoming Prayer: #{_key}".encode!('utf-8')
@@ -129,8 +129,11 @@ class MessageSender
 
   def run
     t = {
-      fajr: '23:00',
-      maghrib: '23:45',
+      fajr: '05:11',
+      dhuhr: '12:44',
+      asr: '16:16',
+      maghrib: '19:06',
+      isha: '20:38'
     }
     ts = t.each do |k, v|
       tp = Time.parse(v)
@@ -145,22 +148,22 @@ class MessageSender
 
     devices = client.devices.players.map { |device| device.id }
 
-    a = []
+    # a = []
     ts.each do |key, intervals|
       _h = intervals.each do |interval, period|
         f = MessageFormatter.new(key, interval)
-        a << {heading: f.heading, content: f.content, devices: devices, send_after: period}
-        # client.create_notification(
-        #   f.heading,
-        #   f.content,
-        #   include_player_ids: devices,
-        #   send_after: period
-        # )
+        # a << {heading: f.heading, content: f.content, devices: devices, send_after: period}
+        client.create_notification(
+          f.heading,
+          f.content,
+          include_player_ids: devices,
+          send_after: period
+        )
       end
       puts "Completed! at: #{Time.now}"
     end
 
-    binding.pry
+    # binding.pry
   end
 
 private

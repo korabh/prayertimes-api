@@ -146,6 +146,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 4.2.7)
+  activesupport
   capybara
   dotenv
   grape

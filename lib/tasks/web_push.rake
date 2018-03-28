@@ -2,11 +2,13 @@ require "pry"
 require "dotenv"
 require "one_signal"
 require "ostruct"
+require 'active_support/core_ext/time'
 
 Dotenv.load
 
 OneSignal::OneSignal.api_key = ENV['ONESIGNAL_API_KEY']
 OneSignal::OneSignal.user_auth_key = ENV['ONESIGNAL_USER_AUTH_KEY']
+
 
 class OneSignalApi
   def initialize(app_id, app_url)
@@ -57,7 +59,11 @@ class OneSignalApi
             en: content
           },
           include_player_ids: opts.fetch(:include_player_ids),
-          priority: opts.fetch(:priority, 5)
+          chrome_web_icon: "",
+          send_after: opts.fetch(:send_after, Time.now),
+          priority: opts.fetch(:priority, 5),
+          ttl: opts.fetch(:ttl, Time.now.seconds_until_end_of_day), # Time To Live - In seconds. The notification will be expired if the device does not come back online until the end of the day.
+          isAnyWeb: true
         }
       )
     )
@@ -84,26 +90,97 @@ class OneSignalApi
   end
 end
 
-APP_ID = 'bab46e1e-c306-429f-8fe2-58759077212f'
-# client = OneSignalApi.new(APP_ID, 'herokuapp.com')
-# client.device('c4a0fea6-8c28-4fff-a35f-a191db070a91')
-# client.devices.players.map { |device| device.id }
-# client.create_notification(
-#   "Parse a JSON API with Ruby",
-#   "net/http feels cumbersome and spartan at times.",
-#   include_player_ids: [player.id]
-# )
-# client.notification(id)
-# client.notifications
-# client.delete_notification(id)
+class MessageFormatter
+  def initialize(key, period)
+    @key = key
+    @period = period
+  end
 
-# class MessageSender
-#   def initialize()
-#   end
-# end
-#
-# class SentMessage
-#   def initialize()
-#   end
-# end
-#
+  attr_reader :key, :period
+
+  def heading
+    "Takvimi: #{_key}".encode!('utf-8')
+  end
+
+  def content
+    if period == (5 || 10 || 15)
+      "#{_key} edhe #{period} minuta."
+    else
+      "Koha e namazit te #{_key}"
+    end
+  end
+
+  def _key
+    case key
+    when :fajr     then "Sabahu"
+    when :dhuhr    then "Dreka"
+    when :asr      then "Ikindia"
+    when :maghrib  then "Akshami"
+    when :isha     then "Jacia"
+    end
+  end
+
+end
+
+class Notification
+  def initialize; end
+
+  def create; end
+end
+
+class MessageSender
+  def initialize(client)
+    @client = client
+  end
+
+  def run
+    t = {
+      fajr: '05:14',
+      dhuhr: '12:45',
+      asr: '16:16',
+      maghrib: '19:05',
+      isha: '20:37'
+    }
+    ts = t.each do |k, v|
+      tp = Time.parse(v)
+      intervals = {
+        0  => tp,
+        5  => tp.advance(seconds: -5),
+        10 => tp.advance(seconds: -10),
+        15 => tp.advance(seconds: -15),
+      }
+      t[k.to_sym] = intervals
+    end
+
+    devices = client.devices.players.map { |device| device.id }
+
+    ts.map do |key, intervals|
+      _h = intervals.each do |interval, period|
+        f = MessageFormatter.new(key, interval)
+        client.create_notification(
+          f.heading,
+          f.content,
+          include_player_ids: devices,
+          send_after: Time.now # period
+        )
+      end
+      puts "Completed! at: #{Time.now}"
+    end
+  end
+
+  private
+
+  attr_reader :client
+
+  def post_message; end
+  def create_notification(params)
+  end
+  def error_message; end
+  def formatted_message; end
+end
+
+APP_ID = 'bab46e1e-c306-429f-8fe2-58759077212f'
+client = OneSignalApi.new(APP_ID, 'herokuapp.com')
+
+job_id = MessageSender.new(client)
+job_id.run

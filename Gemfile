@@ -3,6 +3,7 @@ source "http://rubygems.org"
 ruby "2.3.1"
 
 gem "activerecord", "~> 4.2.7", require: "active_record"
+gem "activesupport"
 gem "otr-activerecord"
 gem "rake"
 gem "grape"

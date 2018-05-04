@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 
 ENV['RACK_ENV'] ||= 'test'
 
 require 'rack/test'
 require './config/application'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 
 RSpec.configure do |config|
   config.color = true

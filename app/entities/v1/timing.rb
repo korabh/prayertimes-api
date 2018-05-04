@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entities
   module V1
     class Timing < Grape::Entity

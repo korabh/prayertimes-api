@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 require 'fileutils'
 require 'active_support/core_ext/string/strip'
@@ -44,12 +46,13 @@ namespace :db do
     end
   end
 
-  desc "Create a migration"
+  desc 'Create a migration'
   task :create_migration, [:name] do |_, args|
-    name, version = args[:name], Time.now.utc.strftime("%Y%m%d%H%M%S")
+    name = args[:name]
+    version = Time.now.utc.strftime('%Y%m%d%H%M%S')
 
     OTR::ActiveRecord._normalizer.migrations_paths.each do |directory|
-      next unless File.exists?(directory)
+      next unless File.exist?(directory)
       migration_files = Pathname(directory).children
       if duplicate = migration_files.find { |path| path.basename.to_s.include?(name) }
         abort "Another migration is already named \"#{name}\": #{duplicate}."

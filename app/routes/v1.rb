@@ -1,4 +1,6 @@
-require "grape-swagger"
+# frozen_string_literal: true
+
+require 'grape-swagger'
 
 module Routes
   module V1
@@ -9,8 +11,7 @@ module Routes
       mount Routes::V1::Timing
 
       add_swagger_documentation \
-           mount_path: '/doc'
-
+        mount_path: '/doc'
     end
   end
 end

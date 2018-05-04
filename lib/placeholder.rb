@@ -1,21 +1,13 @@
+# frozen_string_literal: true
+
 require 'active_support/all'
 
 class Placeholder
-  KEYS = [ [:fajr, 2], [:shurooq, 4], [:dhuhr, 6], [:asr, 8],
-           [:maghrib, 10], [:isha, 12]
-         ]
-  # {
-  #   "fajr": "05:50",
-  #   "shurooq": "07:02",
-  #   "dhuhr": "11:45",
-  #   "asr": "14:06",
-  #   "maghrib": "16:23",
-  #   "isha": "18:01"
-  # }
+  KEYS = [[:fajr, 2], [:shurooq, 4], [:dhuhr, 6], [:asr, 8],
+          [:maghrib, 10], [:isha, 12]].freeze
   def random
-    KEYS.inject({}) do |hash, value|
+    KEYS.each_with_object({}) do |value, hash|
       hash[value.first] = time_travel(minutes: value.last)
-      hash
     end
   end
 

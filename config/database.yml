@@ -1,17 +1,16 @@
-development: 
-  adapter: sqlite3
-  database: db/development.sqlite3
-  encoding: utf8
-  timeout: 5000
-
-test:
-  adapter: sqlite3
-  encoding: utf8
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
-
-production:
+# development: 
+#   adapter: sqlite3
+#   database: db/development.sqlite3
+#   encoding: utf8
+#   timeout: 5000
+#
+# test:
+#   adapter: sqlite3
+#   encoding: utf8
+#   database: db/test.sqlite3
+#   pool: 5
+#   timeout: 5000
+development:
   encoding: utf8
   min_messages: warning
   timeout: 5000

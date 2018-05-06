@@ -11,8 +11,8 @@ OTR::ActiveRecord.configure_from_file! Config.root.join('config', 'database.yml'
   %w[app routes v* *.rb],
   %w[app routes ** *.rb],
   %w[lib ** *.rb],
-  %w[lib wpn *.rb],
-  %w[lib wpn ** *.rb]
+  %w[lib push_api *.rb],
+  %w[lib push_api ** *.rb]
 ].each do |pattern|
   Dir.glob(Config.root.join(*pattern)).each { |file| require file }
 end

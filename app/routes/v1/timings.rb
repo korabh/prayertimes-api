@@ -3,9 +3,6 @@
 module Routes
   module V1
     class Timing < Grape::API
-      helpers do
-      end
-
       get 'timings/random' do
         timings = Placeholder.new
         present :hijri_formatted, Hijri::DateTime.now.strftime('%c')

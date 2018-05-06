@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module WPN
+module PushAPI
   # :nodoc:
-  class WPNClient
+  class PushManager
     def initialize(client)
       @client = client
     end
 
-    def payload_send(params = {})
+    def register(params = {})
       client.create_notification(params)
     end
 

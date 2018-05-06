@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 require 'one_signal'
 require 'active_support/core_ext/time'
+require './lib/push_api/push_manager'
 
-module WPN
+module PushAPI
   # :nodoc:
-  class WPNClient::OneSignal
+  class PushManager::OneSignal
     def device(id)
-      json_response(OneSignal::Player.get(id: id))
+      json_response(
+        OneSignal::Player.get(id: id)
+      )
     end
 
     def devices

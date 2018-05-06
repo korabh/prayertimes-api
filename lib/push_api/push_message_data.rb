@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-module WPN
-  class WPNNotification
+module PushAPI
+  class PushMessageData
+    attr_reader :key, :period
+
     def initialize(key, period)
       @key = key
       @period = period

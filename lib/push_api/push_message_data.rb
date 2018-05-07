@@ -1,32 +1,39 @@
 # frozen_string_literal: true
 
 module PushAPI
+  # :nodoc:
   class PushMessageData
-    attr_reader :key, :period
-
-    def initialize(key, period)
-      @key = key
-      @period = period
+    def initialize(salat, timing)
+      @salat = salat.to_s
+      @timing = timing
     end
 
-    def heading
-      "Upcoming Prayer: #{_key}".encode!('utf-8')
+    def title
+      "Upcoming Prayer: #{salat.capitalize}"
     end
 
-    def content
-      if period == 5 || period == 10 || period == 15
-        "#{period} minutes to #{_key} prayer"
+    def message
+      case timing.first
+      when 5..15
+        post_message
       else
-        "#{_key} :)"
+        fire_notification
       end
     end
 
-    def _key
-      key.to_s.capitalize
+    private
+
+    attr_reader(
+      :salat,
+      :timing
+    )
+
+    def post_message
+      "Approximately #{timing.first} minutes"
     end
 
-    def error_message; end
-
-    def formatted_message; end
+    def fire_notification
+      "Now ##{salat.capitalize} Prayer Time"
+    end
   end
 end

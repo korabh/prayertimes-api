@@ -13,14 +13,17 @@ player_ids = pm.devices.players.map(&:id)
 today = Time.now.strftime('%d-%m-%Y')
 subscriptions = PushAPI::PushSubscription.call(Timings.find_by_date(today))
 
-subscriptions.each do |key, v|
-  pmd = PushAPI::PushMessageData.new(key, v)
-  require 'pry'; binding.pry
-  pm.register(
-    heading: pmd.heading,
-    content: pmd.content,
-    include_player_ids: player_ids,
-    send_after: pmd.period
-  )
+subscriptions.each do |salat, timings|
+  timings.each do |timing|
+    pmd = PushAPI::PushMessageData.new(salat, timing)
+
+    pm.register(
+      heading: pmd.title,
+      content: pmd.message,
+      include_player_ids: player_ids,
+      send_after: timings.second
+    )
+  end
 end
+
 Rails.logger.info('Completed!')

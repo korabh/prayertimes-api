@@ -6,7 +6,7 @@ module Routes
       get 'timings/random' do
         timings = Placeholder.new
         present :hijri_formatted, Hijri::DateTime.now.strftime('%c')
-        present :data, timings.random, with: Entities::V1::Timing, optional_fields: params[:hide_optional_fields]
+        present :data, timings.random, with: Entities::V1::Timing
       end
 
       desc 'Returns all prayer times for a specific date'

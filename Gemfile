@@ -5,8 +5,11 @@ source 'http://rubygems.org'
 ruby '2.3.1'
 
 gem 'activerecord', '~> 4.2.7', require: 'active_record'
+gem 'globalize', '~> 5.1.0'
 gem 'dotenv'
+gem 'pg'
 gem 'grape'
+gem 'nokogiri' 
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
@@ -22,7 +25,7 @@ gem 'rubocop', '~> 0.55.0', require: false
 gem 'sinatra', github: 'sinatra/sinatra'
 
 group :development, :test do
-  gem 'pg'
+  gem 'sqlite3'
 end
 
 group :test do

@@ -2,11 +2,10 @@
 
 module Routes
   module V1
-    class Doowa < Grape::API
-      get 'doowa/masnoon' do
+    class Supplication < Grape::API
+      get 'supplication/masnoon' do
         { "masnoon": 'true' }
       end
     end
   end
-
 end

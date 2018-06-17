@@ -2,7 +2,7 @@
 
 module Entities
   module V1
-    class Doowa < Grape::Entity
+    class Supplication < Grape::Entity
       expose :masnoon
     end
   end

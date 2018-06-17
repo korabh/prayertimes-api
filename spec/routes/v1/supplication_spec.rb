@@ -2,18 +2,18 @@
 
 require 'spec_helper'
 
-describe Routes::V1::Doowa do
+describe Routes::V1::Supplication do
   include Rack::Test::Methods
 
   def app
     Routes::V1::API
   end
 
-  describe 'Duas API' do 
-    describe 'GET /api/v1/doowa/masnoon' do
+  describe 'Supplication API' do
+    describe 'GET /api/v1/supplication/masnoon' do
       describe 'when request is valid' do
-        it 'returns the list of masnoon duas' do 
-          get 'v1/doowa/masnoon'
+        it 'returns the list of masnoon duas' do
+          get 'v1/supplication/masnoon'
           expect(last_response.status).to eq(200)
           expect(last_response.body).to eq(
             {
@@ -24,5 +24,4 @@ describe Routes::V1::Doowa do
       end
     end
   end
-
 end

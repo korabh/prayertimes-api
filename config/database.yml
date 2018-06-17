@@ -1,9 +1,8 @@
-development: 
-  encoding: utf8
-  min_messages: warning
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
   timeout: 5000
-  url: <%= ENV.fetch('DATABASE_URL', '') %>
-  adapter: postgresql
 
 test:
   adapter: sqlite3

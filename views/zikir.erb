@@ -1,0 +1,28 @@
+<br></br>
+<%= javascript_include_tags("https://code.jquery.com/jquery-2.2.4.min.js", "https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js") %>
+<%= stylesheet_include_tags("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") %>
+
+<div class="container">
+    <% zikirs.each do |zikir| %>
+      <section class="jumbotron text-center" style="background-color: #fff;">
+        <div class="container">
+          <h1 class="display-4"><%= zikir.name %></h1>
+          <p class="lead text-muted" style="padding-bottom: 10px;"><%= zikir.url %></p>
+        </div>
+      <div class="card-group">
+          <% zikir.duas.each do |dua| %>
+          <div class="col-md-4">
+            <div class="card mb-4 text-center box-shadow">
+              <div class="card-body">
+                <h5 class="card-title"><%= dua.title %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= dua.arabic %></h6>
+                <p class="card-text"><%= dua.transliteration %></p>
+                <a href="#" class="card-link"><%= dua.reference %></a>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+</div>

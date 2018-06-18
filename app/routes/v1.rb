@@ -9,7 +9,7 @@ module Routes
       format :json
 
       mount Routes::V1::Timing
-      mount Routes::V1::Supplication
+      mount Routes::V1::Zikir
 
       add_swagger_documentation \
         mount_path: '/doc'

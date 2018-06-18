@@ -4,17 +4,17 @@ require './config/application'
 require 'ostruct'
 require 'json'
 
-namespace :seed do
-  task :supplication do
+namespace :db do
+  task :seed do
     puts Date.today.strftime('%d-%m-%Y')
 
-    unless table_exists?(:categories) && table_exists?(:duas)
-      ActiveRecord::Base.connection.create_table(:categories) do |t|
+    unless table_exists?(:zikirs) && table_exists?(:duas)
+      ActiveRecord::Base.connection.create_table(:zikirs) do |t|
         t.string :name, null: false, default: ''
         t.string :url
       end
       ActiveRecord::Base.connection.create_table(:duas) do |t|
-        t.references :category, index: true
+        t.references :zikir, index: true
         t.string :title, null: false, default: ''
         t.string :arabic
         t.string :transliteration
@@ -26,26 +26,26 @@ namespace :seed do
     end
 
     results.each do |result|
-      category = Category.new.tap do |c|
-        c.name = result.name
-        c.url = result.url
-        c.save!
+      zikir = Zikir.new.tap do |z|
+        z.name = result.name
+        z.url = result.url
+        z.save!
       end
 
       next if result.duas.blank?
 
       result.duas.each do |dd|
-        supplication = Doowa.new(
-          category_id: category.id,
+        dua = Dua.new(
+          zikir_id: zikir.id,
           title: dd.title,
           arabic: dd.arabic,
           transliteration: dd.transliteration,
           translation: dd.translation,
           reference: dd.reference
         )
-        supplication.save!
+        dua.save!
 
-        puts "Added #{category.name} - #{supplication.title}"
+        puts "Added #{zikir.name} - #{dua.title}"
       end
     end
   end
@@ -63,10 +63,10 @@ namespace :seed do
   end
 
   def create_translation_tables!
-    Category.create_translation_table!(
+    Zikir.create_translation_table!(
       name: :string
     )
-    Supplication.create_translation_table!(
+    Dua.create_translation_table!(
       title: :string,
       transliteration: :string,
       translation: :string,

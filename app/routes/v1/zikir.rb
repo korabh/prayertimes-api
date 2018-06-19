@@ -2,6 +2,7 @@
 
 module Routes
   module V1
+    # :nodoc:
     class Zikir < Grape::API
       get 'zikirs' do
         zikirs = ::Zikir.all

@@ -6,18 +6,21 @@
     <% zikirs.each do |zikir| %>
       <section class="jumbotron text-center" style="background-color: #fff;">
         <div class="container">
-          <h1 class="display-4"><%= zikir.name %></h1>
+          <p class="h1"><%= zikir.name %></p>
           <p class="lead text-muted" style="padding-bottom: 10px;"><%= zikir.url %></p>
         </div>
       <div class="card-group">
           <% zikir.duas.each do |dua| %>
-          <div class="col-md-4">
-            <div class="card mb-4 text-center box-shadow">
+          <div class="col-md-10 offset-md-1">
+            <div class="card text-venter mb-4">
               <div class="card-body">
-                <h5 class="card-title"><%= dua.title %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= dua.arabic %></h6>
+                <h5 class="lead card-title"><%= dua.title %></h5>
+                <h6 class="display-4 card-subtitle mb-2"><%= dua.arabic %></h6>
                 <p class="card-text"><%= dua.transliteration %></p>
-                <a href="#" class="card-link"><%= dua.reference %></a>
+                <blockquote class="blockquote mb-0">
+                    <%= dua.reference %>
+                  </footer>
+                </blockquote>
               </div>
             </div>
           </div>

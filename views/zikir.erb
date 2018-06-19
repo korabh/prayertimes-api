@@ -11,7 +11,7 @@
         <div class="card-group">
           <% zikir.duas.each do |dua| %>
             <div class="col-md-10 offset-md-1">
-              <div class="card text-venter mb-5">
+              <div class="bd-callout bd-callout-warning card text-venter mb-5">
                 <div class="card-body">
                   <h5 class="lead card-title" style="padding-bottom: 10px;"><%= dua.title %></h5>
                   <h6 style="font-size:3.0rem" class="display-4 card-subtitle mb-2"><%= dua.arabic %></h6>
@@ -29,3 +29,35 @@
       </section>
     <% end %>
 </div>
+
+<style>
+  .bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+  }
+
+  .bd-callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem;
+  }
+
+  .bd-callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .bd-callout code {
+    border-radius: .25rem;
+  }
+
+  .bd-callout + .bd-callout {
+    margin-top: -.25rem;
+  }
+
+  .bd-callout-warning{
+    border-left-color: #f0ad4e;
+  }
+</style>

@@ -2,6 +2,7 @@
 
 module Entities
   module V1
+    # :nodoc:
     class Dua < Grape::Entity
       expose :title
       expose :arabic
@@ -9,7 +10,8 @@ module Entities
       expose :translation
       expose :reference
     end
-    
+
+    # :nodoc:
     class Zikir < Grape::Entity
       expose :id
       expose :name

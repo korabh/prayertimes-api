@@ -23,7 +23,7 @@ module PushAPI
 
     def build!
       raise if attributes.blank?
-      
+
       hash = {}
       attributes.each do |key, value|
         time = Time.parse(value)

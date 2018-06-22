@@ -24,6 +24,9 @@ gem 'rest-client'
 gem 'rubocop', '~> 0.55.0', require: false
 gem 'sinatra', github: 'sinatra/sinatra'
 
+gem 'ruby_event_store'
+gem 'rails_event_store_active_record'
+
 group :development, :test do
   gem 'sqlite3'
 end

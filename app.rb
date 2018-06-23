@@ -55,4 +55,5 @@ class App < Sinatra::Base
 
     erb :zikir, locals: { zikirs: zikirs }
   end
+
 end

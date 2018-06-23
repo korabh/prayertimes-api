@@ -1,38 +1,27 @@
 # frozen_string_literal: true
 
 require './config/application'
-require 'rails_event_store_active_record'
 require 'ruby_event_store'
+require 'rails_event_store_active_record'
 
 namespace :event do
   task :publisher do
     create_events_tables!
 
-    class DailyReminder < RubyEventStore::Event
-    end
-
-    event_store = RubyEventStore::Client.new(
-      repository: RailsEventStoreActiveRecord::EventRepository.new
-    )
-    action_data = {
+    event_data = {
       data: {
-        trigger_identity: '92429d82a41e93048',
-        trigger_source: {
-          label: 'on_hearing_athan',
-          value: '41'
-        },
-        submitted_at: Time.now,
+        label: 'on_hearing_athan',
+        value: '41',
+        started_at: Time.now,
         calculated: {
           score: 10
         }
       }
     }
-    event_store.append_to_stream(
-      DailyReminder.new(action_data),
-      stream_name: 'Id-92429d82a41e93048'
+    EventStore.client.publish_event(
+      DailyReminder.new(event_data),
+      stream_name: 'on_hearing_athan'
     )
-
-    require 'pry'; binding.pry
   end
 
   def create_events_tables!

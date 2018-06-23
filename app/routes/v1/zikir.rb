@@ -5,8 +5,11 @@ module Routes
     # :nodoc:
     class Zikir < Grape::API
       get 'zikirs' do
-        zikirs = ::Zikir.all
-        present :data, zikirs, with: Entities::V1::Zikir
+        # zikirs = ::Zikir.all
+        # present :data, zikirs, with: Entities::V1::Zikir
+        
+        events = EventStore.client.read.backward.each.to_a
+        present :events, events
       end
 
       get 'zikirs/:zikir_id' do

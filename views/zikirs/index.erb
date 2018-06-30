@@ -2,7 +2,7 @@
 <%= stylesheet_include_tags("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") %>
 
 <div class="container">
-  <ul class="list-group" style="padding:30px;">
+  <ul class="list-group" style="padding:10px;">
     <% zikirs.find_each do |zikir| %>
       <a href="/zikirs/<%= zikir.id %>" style="padding: 30px;" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">

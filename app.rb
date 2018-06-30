@@ -53,7 +53,12 @@ class App < Sinatra::Base
   get '/zikirs' do
     zikirs = Zikir.all
 
-    erb :zikir, locals: { zikirs: zikirs }
+    erb :'zikirs/index', locals: { zikirs: zikirs }
   end
 
+  get '/zikirs/:id' do
+    zikir = Zikir.find(params[:id])
+
+    erb :'zikirs/show', locals: { zikir: zikir }
+  end
 end

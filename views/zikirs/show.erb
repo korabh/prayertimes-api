@@ -2,10 +2,9 @@
 <%= stylesheet_include_tags("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") %>
 
 <div class="container">
-    <% zikirs.each do |zikir| %>
       <section class="jumbotron text-center" style="background-color: #fff;">
         <div class="container">
-          <p class="h4"><%= zikir.name %></p>
+          <p class="h4"><%= zikir.id %> - <%= zikir.name %></p>
           <p class="lead text-muted" style="padding-bottom: 10px;"><%= zikir.url %></p>
         </div>
         
@@ -29,7 +28,6 @@
           <% end %>
         </div>
       </section>
-    <% end %>
 </div>
 
 <style>

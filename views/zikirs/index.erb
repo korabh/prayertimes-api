@@ -1,0 +1,51 @@
+<%= javascript_include_tags("https://code.jquery.com/jquery-2.2.4.min.js", "https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js") %>
+<%= stylesheet_include_tags("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") %>
+
+<div class="container">
+  <ul class="list-group" style="padding:30px;">
+    <% zikirs.find_each do |zikir| %>
+      <a href="/zikirs/<%= zikir.id %>" style="padding: 30px;" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-2">
+            <%= zikir.name %>
+          </h5>
+        </div>
+        <p class="mb-1"><%= zikir.url %></p>
+        <span class="badge badge-primary badge-pill"><%= zikir.duas.length %> </span>
+      </a>
+    <% end %>
+  </ul>
+</div>
+
+<style>
+
+  .bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .30rem;
+    border-radius: .25rem;
+  }
+
+  .bd-callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem;
+  }
+
+  .bd-callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .bd-callout code {
+    border-radius: .25rem;
+  }
+
+  .bd-callout + .bd-callout {
+    margin-top: -.25rem;
+  }
+
+  .bd-callout-warning{
+    border-left-color: #f0ad4e;
+  }
+</style>

@@ -2,32 +2,31 @@
 <%= stylesheet_include_tags("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") %>
 
 <div class="container">
-      <section class="jumbotron text-center" style="background-color: #fff;">
-        <div class="container">
-          <p class="h4"><%= zikir.id %> - <%= zikir.name %></p>
-          <p class="lead text-muted" style="padding-bottom: 10px;"><%= zikir.url %></p>
-        </div>
-        
-        <div class="card-group">
-          <% zikir.duas.each do |dua| %>
-            <div class="col-md-11">
-              <div class="bd-callout bd-callout-warning card text-venter mb-4">
-                <div class="card-body">
-                  <h5 class="lead card-title" style="padding-bottom: 10px;"><%= dua.title %></h5>
-                  <h6 style="font-size:3.0rem" class="display-4 card-subtitle mb-2"><%= dua.arabic %></h6>
-                  <p class="card-text text-muted"><%= dua.transliteration %></p>
-                  <p class="card-text"><%= dua.translation %></p>
-                  
-                  <blockquote class=" font-italic blockquote mb-0">
-                      <%= dua.reference %>
-                    </footer>
-                  </blockquote>
-                </div>
-              </div>
+  <section class="jumbotron text-center" style="background-color: #fff;">
+    <div class="container">
+      <p class="h4"><%= zikir.id %> - <%= zikir.name %></p>
+    </div>
+
+    <div class="card-group">
+      <% zikir.duas.each do |dua| %>
+        <div class="col-md-12">
+          <div class="bd-callout bd-callout-warning card text-venter mb-4">
+            <div class="card-body">
+              <h5 class="lead card-title" style="padding-bottom: 10px;"><%= dua.title %></h5>
+              <h6 style="font-size:3.0rem" class="display-4 card-subtitle mb-2"><%= dua.arabic %></h6>
+              <p class="card-text text-muted"><%= dua.transliteration %></p>
+              <p class="card-text"><%= dua.translation %></p>
+
+              <blockquote class=" font-italic blockquote mb-0">
+                <%= dua.reference %>
+                </footer>
+              </blockquote>
             </div>
-          <% end %>
+          </div>
         </div>
-      </section>
+      <% end %>
+    </div>
+  </section>
 </div>
 
 <style>

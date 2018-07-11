@@ -15,7 +15,6 @@ namespace :push_api do
     subscriptions = PushAPI::PushSubscription.call(Timings.find_by_date(today))
 
     subscriptions.each do |salat, timings|
-      next if salat == :fajr
       timings.each do |timing|
         pmd = PushAPI::PushMessageData.new(salat, timing)
 

@@ -2,7 +2,7 @@
 
 require 'active_support/concern'
 
-module TimableEditor
+module TimetableEditor
   extend ActiveSupport::Concern
 
   module ClassMethods

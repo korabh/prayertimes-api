@@ -13,7 +13,7 @@ module TimetableEditor
 
     def dhuhr
       time = Time.parse(self.dhuhr)
-      self.dhuhr = time.advance(minutes: 40)
+      self.dhuhr = time.advance(minutes: 16)
     end
 
   end

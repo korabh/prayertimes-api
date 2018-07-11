@@ -7,21 +7,14 @@ module TimableEditor
 
   module ClassMethods
     def fajr
-      time_advance_by(minutes: 40, self.fajr)
+      time = Time.parse(self.fajr)
+      self.fajr = time.advance(minutes: 40)
     end
 
     def dhuhr
-      time_advance_by(minutes: 16, self.dhuhr)
+      time = Time.parse(self.dhuhr)
+      self.dhuhr = time.advance(minutes: 40)
     end
 
-    private
-
-    def time_advanced_by(opts, attr)
-      time = Time.parse(attr)
-      self.attr = time.advance(
-        minutes: opts.fetch(:minutes, 0), 
-        seconds: opts.fetch(:seconds, 0)
-      )
-    end
   end
 end

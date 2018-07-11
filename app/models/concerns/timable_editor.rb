@@ -18,7 +18,10 @@ module TimableEditor
 
     def time_advanced_by(opts, attr)
       time = Time.parse(attr)
-      self.attr = time.advance(opts)
+      self.attr = time.advance(
+        minutes: opts.fetch(:minutes, 0), 
+        seconds: opts.fetch(:seconds, 0)
+      )
     end
   end
 end

@@ -11,7 +11,7 @@ module TimableEditor
     end
 
     def dhuhr
-      time_advance_by(minutes: 16, self.dhur)
+      time_advance_by(minutes: 16, self.dhuhr)
     end
 
     private

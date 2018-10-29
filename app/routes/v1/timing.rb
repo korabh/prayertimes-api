@@ -2,6 +2,7 @@
 
 module Routes
   module V1
+    # :nodoc:
     class Timing < Grape::API
       get 'timings/random' do
         timings = Placeholder.new
@@ -15,11 +16,11 @@ module Routes
         optional :hide_optional_fields, type: Boolean, default: 'true'
       end
       get 'timings/daily' do
-        date = Time.at(params[:timestamp]).strftime('%d-%m-%Y')
-        timings = Timings.find_by_date(date)
+        date = Time.at(params[:timestamp])
+        timetable = TimetableFinder.new.find_by_date(date)
         present :for, 'daily'
         present :date, date
-        present :hijri, timings.hijri
+        present :hijri, timetable.hijri
         present :hijri_formatted, Hijri::DateTime.now.strftime('%c')
         present :calculation_method, 'Muslim World League Fajr 18.0 degrees, Isha 17.0 degrees'
         present :juristic_method, 'Standard (Hanbali, Maliki, Shafi)'
@@ -31,7 +32,7 @@ module Routes
         present :country, 'Kosovo'
         present :qibla_direction, '137'
         present :type, 'prayer_times'
-        present :data, timings, with: Entities::V1::Timing, optional_fields: params[:hide_optional_fields]
+        present :data, timetable, with: Entities::V1::Timing, optional_fields: params[:hide_optional_fields]
       end
 
       get 'timings/weekly' do

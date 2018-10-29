@@ -8,6 +8,7 @@ OTR::ActiveRecord.configure_from_file! Config.root.join('config', 'database.yml'
 [
   %w[app models ** *.rb],
   %w[app entities ** *.rb],
+  %w[app services ** *.rb],
   %w[app routes v* *.rb],
   %w[app routes ** *.rb],
   %w[lib ** *.rb],

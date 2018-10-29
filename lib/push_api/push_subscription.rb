@@ -38,7 +38,7 @@ module PushAPI
 
     def scheduled_time(time)
       {
-        0  => time.advance(seconds: 5),
+        0 => time.advance(seconds: 5),
         10 => time.advance(minutes: -10)
       }
     end

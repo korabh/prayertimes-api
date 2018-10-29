@@ -8,7 +8,7 @@ namespace :push_api do
   task :schedule_notifications do
     player_ids = client.devices.players.map(&:id)
 
-    timetable = TimetableFinder.new.find_by_date(date)
+    timetable = TimetableFinder.new.find_by_date(Date.today)
     notifications = PushAPI::PushSubscription.call(timetable)
 
     notifications.each do |key, timings|

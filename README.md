@@ -15,6 +15,10 @@ Shafi)","daylight":"-/-","timezone":"UTC+01:00","latitude":"42.6629","longitude"
 
 ### TODO
 - [ ] Add country/city params
+- [ ] Webhook URL when a notification is displayed
+- [ ] Webhook URL when a notification is clicked
+- [ ] Webhook URL when a notification is dismissed
+
 
 ## License
 

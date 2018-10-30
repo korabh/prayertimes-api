@@ -34,7 +34,7 @@ module PushAPI
       json_response(
         OneSignal::Notification.create(
           params: {
-            url: 'https://dawa-tools.herokuapp.com',
+            url: params.fetch(:url, 'dawa-tools.herokuapp.com'),
             headings: { en: params.fetch(:heading) },
             contents: { en: params.fetch(:content) },
             include_player_ids: params.fetch(:include_player_ids),

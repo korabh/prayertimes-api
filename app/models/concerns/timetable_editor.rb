@@ -19,7 +19,7 @@ module TimetableEditor
   end
 
   def dhuhr
-    time = time_advanced(read(:dhuhr), minutes: 16)
+    time = time_advanced(read(:dhuhr), minutes: 36)
     change(:dhuhr, time)
   end
 end
